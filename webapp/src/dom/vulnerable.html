@@ -1,0 +1,17 @@
+<html>
+    <body>
+        <a href="/">Home</a>
+        <form id="status-form">
+            <label for="status">Enter your status:</label>
+            <input type="text" id="status" name="status">
+            <input type="submit">
+        </form>
+        <p id="current-status">Current status: None</p>
+        <script>
+            document.getElementById('status-form').addEventListener('submit', e => {
+                e.preventDefault();
+                document.getElementById('current-status').innerHTML = 'Current status: ' + document.getElementById('status').value;
+            });
+        </script>
+    </body>
+</html>

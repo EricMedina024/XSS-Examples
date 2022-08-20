@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  database:
+    build: database
+    expose:
+      - "3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: guessme
+      MYSQL_DATABASE: vulnerable_app
+      MYSQL_USER: vulnerable
+      MYSQL_PASSWORD: guessme
+    healthcheck:
+      test: "mysql -u$$MYSQL_USER -p$$MYSQL_ROOT_PASSWORD $$MYSQL_DATABASE -e 'select 1'"
+      interval: 1s
+      retries: 240
+
+  webapp:
+    build: webapp
+    depends_on:
+      database:
+        condition: service_healthy
+    ports:
+      - "8080:80"
+    links:
+      - "database:database"
+    stdin_open: true
+    tty: true

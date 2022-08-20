@@ -1,0 +1,1 @@
+CREATE TABLE comments (name VARCHAR(100), comment VARCHAR(500));
